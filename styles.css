@@ -1473,67 +1473,67 @@ video {
 }
 
 .token.property {
-  color: #9cdcfe;
+  color: #f8f8f2;
 }
 
 .token.string {
-  color: #ce9178;
+  color: #e6db74;
 }
 
 .token.number {
-  color: #b5cea8;
+  color: #ae81ff;
 }
 
 .token.boolean {
-  color: #569cd6;
+  color: #ae81ff;
 }
 
 .token.null {
-  color: #569cd6;
+  color: #ae81ff;
 }
 
 .token.keyword {
-  color: #c586c0;
+  color: #f92672;
 }
 
 .token.function {
-  color: #dcdcaa;
+  color: #a6e22e;
 }
 
 .token.operator {
-  color: #d4d4d4;
+  color: #f8f8f2;
 }
 
 .token.comment {
-  color: #6a9955;
+  color: #75715e;
 }
 
 .token.punctuation {
-  color: #d4d4d4;
+  color: #f8f8f2;
 }
 
 .token.class-name {
-  color: #4ec9b0;
+  color: #a6e22e;
 }
 
 .token.tag {
-  color: #569cd6;
+  color: #f92672;
 }
 
 .token.selector {
-  color: #d7ba7d;
+  color: #a6e22e;
 }
 
 .token.attr-name {
-  color: #9cdcfe;
+  color: #a6e22e;
 }
 
 .token.attr-value {
-  color: #ce9178;
+  color: #e6db74;
 }
 
 .token.variable {
-  color: #9cdcfe;
+  color: #f8f8f2;
 }
 
 :root {
