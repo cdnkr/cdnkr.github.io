@@ -1492,6 +1492,50 @@ video {
   color: #569cd6;
 }
 
+.token.keyword {
+  color: #c586c0;
+}
+
+.token.function {
+  color: #dcdcaa;
+}
+
+.token.operator {
+  color: #d4d4d4;
+}
+
+.token.comment {
+  color: #6a9955;
+}
+
+.token.punctuation {
+  color: #d4d4d4;
+}
+
+.token.class-name {
+  color: #4ec9b0;
+}
+
+.token.tag {
+  color: #569cd6;
+}
+
+.token.selector {
+  color: #d7ba7d;
+}
+
+.token.attr-name {
+  color: #9cdcfe;
+}
+
+.token.attr-value {
+  color: #ce9178;
+}
+
+.token.variable {
+  color: #9cdcfe;
+}
+
 :root {
   /* --primary: #ff7f00; */
   /* --primary: #1dd4f2; */
