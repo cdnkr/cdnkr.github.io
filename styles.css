@@ -556,40 +556,6 @@ video {
   display: none;
 }
 
-.container{
-  width: 100%;
-}
-
-@media (min-width: 640px){
-  .container{
-    max-width: 640px;
-  }
-}
-
-@media (min-width: 768px){
-  .container{
-    max-width: 768px;
-  }
-}
-
-@media (min-width: 1024px){
-  .container{
-    max-width: 1024px;
-  }
-}
-
-@media (min-width: 1280px){
-  .container{
-    max-width: 1280px;
-  }
-}
-
-@media (min-width: 1536px){
-  .container{
-    max-width: 1536px;
-  }
-}
-
 .prose{
   color: #e5e7eb;
   max-width: 100%;
@@ -1104,10 +1070,6 @@ video {
   margin-bottom: 0;
 }
 
-.visible{
-  visibility: visible;
-}
-
 .relative{
   position: relative;
 }
@@ -1334,13 +1296,14 @@ video {
   padding-bottom: 2rem;
 }
 
-.text-center{
-  text-align: center;
-}
-
 .text-2xl{
   font-size: 1.5rem;
   line-height: 2rem;
+}
+
+.text-3xl{
+  font-size: 1.875rem;
+  line-height: 2.25rem;
 }
 
 .text-4xl{
@@ -1358,10 +1321,6 @@ video {
   line-height: 1.75rem;
 }
 
-.font-\[400\]{
-  font-weight: 400;
-}
-
 .font-bold{
   font-weight: 700;
 }
@@ -1374,27 +1333,13 @@ video {
   text-transform: uppercase;
 }
 
-.lowercase{
-  text-transform: lowercase;
-}
-
 .leading-none{
   line-height: 1;
-}
-
-.text-gray-400{
-  --tw-text-opacity: 1;
-  color: rgb(189 189 189 / var(--tw-text-opacity, 1));
 }
 
 .text-gray-500{
   --tw-text-opacity: 1;
   color: rgb(158 158 158 / var(--tw-text-opacity, 1));
-}
-
-.text-gray-600{
-  --tw-text-opacity: 1;
-  color: rgb(117 117 117 / var(--tw-text-opacity, 1));
 }
 
 .text-logo{
@@ -1417,20 +1362,12 @@ video {
   text-decoration-line: underline;
 }
 
-.decoration-\[\#ffffff\]{
-  text-decoration-color: #ffffff;
-}
-
 .decoration-primary{
   text-decoration-color: var(--primary);
 }
 
 .decoration-wavy{
   text-decoration-style: wavy;
-}
-
-.underline-offset-4{
-  text-underline-offset: 4px;
 }
 
 .underline-offset-\[8px\]{
@@ -1441,8 +1378,7 @@ video {
   outline-offset: 4px;
 }
 
-.blur{
-  --tw-blur: blur(8px);
+.filter{
   filter: var(--tw-blur) var(--tw-brightness) var(--tw-contrast) var(--tw-grayscale) var(--tw-hue-rotate) var(--tw-invert) var(--tw-saturate) var(--tw-sepia) var(--tw-drop-shadow);
 }
 
@@ -1647,10 +1583,6 @@ video {
 
   .lg\:pt-2{
     padding-top: 0.5rem;
-  }
-
-  .lg\:text-left{
-    text-align: left;
   }
 }
 
