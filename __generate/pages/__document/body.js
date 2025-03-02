@@ -3,15 +3,17 @@ const { scriptsHTML } = require("./scripts");
 
 function bodyHTML({
     content,
-    scripts
+    scripts,
+    dirOffset = '.'
 }) {
     const html = `
 <body class="bg-background text-text flex flex-col items-center w-full min-h-screen py-8">
     ${containerHTML({
-        content
+        content,
+        dirOffset
     })}
     ${scriptsHTML({
-        scripts
+        scripts,
     })}
 </body>
 </html>`;

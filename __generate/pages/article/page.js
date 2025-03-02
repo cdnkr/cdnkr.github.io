@@ -266,7 +266,8 @@ async function generateArticlePageHTML({ title: articleTitle, slug, sectionTitle
 ${__headHTML}
 ${bodyHTML({
     content,
-    scripts
+    scripts,
+    dirOffset: '../'
 })}`;
 
     // create output folder if it doesn't exist
