@@ -3,7 +3,6 @@
 @tailwind components;
 @tailwind utilities;
 
-/* Your custom styles here */
 .no-scrollbar::-webkit-scrollbar {
     display: none;
 }
@@ -13,27 +12,94 @@
     scrollbar-width: none;
 }
 
+::-webkit-scrollbar {
+    height: 15px;
+    width: 15px;
+}
+
+::-webkit-scrollbar-track {
+    border-radius: 10px;
+    -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
+}
+
+::-webkit-scrollbar-thumb {
+    background: hsla(0, 0%, 100%, 0.3);
+    border-radius: 10px;
+    -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.5);
+}
+
+::-webkit-scrollbar-thumb:window-inactive {
+    background: hsla(0, 0%, 100%, 0.3);
+}
+
 .copied {
     opacity: 0.7;
     transition: opacity 0.2s ease;
 }
 
-.token.property { color: #f8f8f2; }
-.token.string { color: #e6db74; }
-.token.number { color: #ae81ff; }
-.token.boolean { color: #ae81ff; }
-.token.null { color: #ae81ff; }
-.token.keyword { color: #f92672; }
-.token.function { color: #a6e22e; }
-.token.operator { color: #f8f8f2; }
-.token.comment { color: #75715e; }
-.token.punctuation { color: #f8f8f2; }
-.token.class-name { color: #a6e22e; }
-.token.tag { color: #f92672; }
-.token.selector { color: #a6e22e; }
-.token.attr-name { color: #a6e22e; }
-.token.attr-value { color: #e6db74; }
-.token.variable { color: #f8f8f2; }
+.token.property {
+    color: #f8f8f2;
+}
+
+.token.string {
+    color: #e6db74;
+}
+
+.token.number {
+    color: #ae81ff;
+}
+
+.token.boolean {
+    color: #ae81ff;
+}
+
+.token.null {
+    color: #ae81ff;
+}
+
+.token.keyword {
+    color: #f92672;
+}
+
+.token.function {
+    color: #a6e22e;
+}
+
+.token.operator {
+    color: #f8f8f2;
+}
+
+.token.comment {
+    color: #75715e;
+}
+
+.token.punctuation {
+    color: #f8f8f2;
+}
+
+.token.class-name {
+    color: #a6e22e;
+}
+
+.token.tag {
+    color: #f92672;
+}
+
+.token.selector {
+    color: #a6e22e;
+}
+
+.token.attr-name {
+    color: #a6e22e;
+}
+
+.token.attr-value {
+    color: #e6db74;
+}
+
+.token.variable {
+    color: #f8f8f2;
+}
 
 :root {
     /* --primary: #ff7f00; */
