@@ -1,16 +1,20 @@
-const fs = require('fs').promises;
-const path = require('path');
-const marked = require('marked');
+import fs from 'fs/promises';
+import path from 'path';
+import esbuild from 'esbuild';
+import { exec } from 'child_process';
+import React from 'react';
+import ReactDOMServer from 'react-dom/server';
 
-const { exec } = require('child_process');
+// import { compile } from '@mdx-js/mdx';
 
-const { generateArticlePageHTML } = require('./pages/article/page.js');
-const { generateIndexHTML } = require('./pages/index.js');
-const { processTailwind } = require('./tailwind.js');
+import HtmlDocument from './pages/html.jsx';
+import HomeTemplate from './pages/template.jsx';
+import ArticleTemplate from './pages/article/template.jsx';
 
-const config = require('./config.json');
+import { processTailwind } from './tailwind.js';
+import config from './config.js';
 
-async function parseArticles(articleFiles) {
+async function parseArticles(articleFiles) {    
     articleFiles = articleFiles.map(file => file?.replace('.md', ''));
 
     const articles = [];
@@ -39,10 +43,18 @@ async function parseArticles(articleFiles) {
 
             sectionTitles.push(title);
 
-            // convert markdown to html
-            const contentHTML = marked.parse(content);
+            const marked = await import('marked');
 
-            sectionsHTML.push(contentHTML);
+            const parsed = marked.parse(content);
+
+            // Convert MDX to React components
+            // const compiled = await compile(marked.default(content), {
+            //     jsx: true,
+            //     // Add any MDX plugins you want here
+            // });
+
+            // Store the compiled MDX
+            sectionsHTML.push(parsed);
         }
 
         articles.push({
@@ -54,6 +66,63 @@ async function parseArticles(articleFiles) {
     }
 
     return articles;
+}
+
+function gitCommitAndPush() {
+    exec(`cd ../ && git add . && git commit -m "${config.commitMessage}" && git push`, (error, stdout, stderr) => {
+        if (error) {
+            console.error(`Error: ${error.message}`);
+            return;
+        }
+        if (stderr) {
+            console.error(`Error: ${stderr}`);
+            return;
+        }
+        console.log(`Git add and commit completed: ${stdout}`);
+    });
+}
+
+async function generatePage({ 
+    template,
+    initialProps,
+    hydrateScriptSrc,
+    dirOffset,
+    title,
+    description,
+    keywords,
+    hydrateEntryPoint,
+    outdir 
+}) {
+    const html = ReactDOMServer.renderToString(
+        React.createElement(HtmlDocument, {
+            content: React.createElement(template, initialProps),
+            title,
+            description,
+            keywords,
+            dirOffset,
+            initialProps,
+            hydrateScriptSrc
+        })
+    );
+
+    // Bundle client-side code
+    await esbuild.build({
+        entryPoints: [hydrateEntryPoint],
+        bundle: true,
+        outdir,
+        format: 'esm',
+        splitting: true,
+        minify: true,
+        loader: {
+            '.js': 'jsx',
+            '.jsx': 'jsx'
+        },
+        define: {
+            'process.env.NODE_ENV': '"production"'
+        }
+    });
+
+    return html;
 }
 
 async function generate() {
@@ -74,44 +143,61 @@ async function generate() {
         await fs.cp('./images', '../images', { recursive: true });
 
         // get all articles filenames
-        const articleFiles = await fs.readdir('./articles')
+        const articleFiles = await fs.readdir('./articles');
 
         // parse all articles md file content -> title, date, tags, sections (html content)
         const articles = await parseArticles(articleFiles);
         console.log(articles);
 
-        // generate article pages
-        articles.forEach(article => {
-            generateArticlePageHTML({
-                ...article,
-                similar: articles.filter(a =>
-                    a.tags.split(',').some(k => article.tags.split(',').some(keyword => keyword === k))
-                    && a.title !== article.title
-                )
-            });
-            console.log(`${article.title} generated successfully!`);
-        });
+        // create output folder if it doesn't exist
+        await fs.mkdir(path.join('../articles'), { recursive: true });
 
-        // generate index page
-        generateIndexHTML(articles);
+        // generate home page
+        const indexPageHTML = await generatePage({
+            template: HomeTemplate,
+            initialProps: { articles },
+            hydrateScriptSrc: '../dist/hydrate.js',
+            dirOffset: './',
+            title: `${config.title}`,
+            description: config.description,
+            keywords: config.keywords,
+            hydrateEntryPoint: './pages/hydrate.jsx',
+            outdir: '../dist'
+        });
+        
+        // write index page to ../index.html
+        await fs.writeFile(path.join('../index.html'), indexPageHTML);
         console.log(`Index page generated successfully!`);
+
+
+        // generate article pages
+        for (let article of articles) {
+            const similar = articles.filter(a =>
+                a.tags.split(',').some(k => article.tags.split(',').some(keyword => keyword === k))
+                && a.title !== article.title
+            );
+
+            const initialProps = { ...article, similar };
+
+            const articlePageHTML = await generatePage({
+                template: ArticleTemplate,
+                initialProps,
+                hydrateScriptSrc: '../dist/article/hydrate.js',
+                dirOffset: '../',
+                title: `${config.title} | ${article.title}`,
+                description: config.description,
+                keywords: config.keywords,
+                hydrateEntryPoint: './pages/article/hydrate.jsx',
+                outdir: '../dist/article'
+            });
+    
+            await fs.writeFile(path.join('../articles', `${article.slug}.html`), articlePageHTML);
+            console.log(`${article.title} generated successfully!`);
+        }
 
         exec('live-server ../');
 
-        if (!config.push) return;
-
-        // run git add and git commit
-        exec(`cd ../ && git add . && git commit -m "${config.commitMessage}" && git push`, (error, stdout, stderr) => {
-            if (error) {
-                console.error(`Error: ${error.message}`);
-                return;
-            }
-            if (stderr) {
-                console.error(`Error: ${stderr}`);
-                return;
-            }
-            console.log(`Git add and commit completed: ${stdout}`);
-        });
+        if (config.push) gitCommitAndPush();
 
     } catch (error) {
         console.error('Error:', error);
