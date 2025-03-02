@@ -15,9 +15,10 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-json.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-bash.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-powershell.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-javascript.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-typescript.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/9000.0.1/components/prism-jsx.min.js" integrity="sha512-02Ybjxfrp2RGVCd29o1Didkx6lAD2yQRW4vOqCzpEWsqfRay1FhN6G4FFPSGu6ER01RAWjLPVraD9tixC5Sbow==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-jsx.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-css.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-markdown.min.js"></script>
 </head>
@@ -214,7 +215,7 @@
                             <p>In a Next.js App Router project, use <code>layout.tsx</code> in the <code>app</code> directory to add the necessary tags.</p>
 <ol>
 <li><p>Open your <code>app/layout.tsx</code> file and add the manifest link, theme color, and icon link in the <code>&lt;head&gt;</code> section.</p>
-<pre><code class="language-typescript">// app/layout.tsx
+<pre><code class="language-jsx">// app/layout.tsx
 import &#39;./globals.css&#39;;
 import { Metadata } from &#39;next&#39;;
 
@@ -253,7 +254,7 @@ export default function RootLayout({
                             <p>This will allow users to manually trigger the PWA install prompt when they click a button.</p>
 <ol>
 <li><p>Create an <code>InstallButton</code> component that listens for the <code>beforeinstallprompt</code> event, which is triggered when the app meets the PWA installability criteria.</p>
-<pre><code class="language-typescript">// components/InstallButton.tsx
+<pre><code class="language-jsx">// components/InstallButton.tsx
 import { useEffect, useState } from &#39;react&#39;;
 
 const InstallButton = () =&gt; {
@@ -297,7 +298,7 @@ export default InstallButton;
 </code></pre>
 </li>
 <li><p>Add <code>InstallButton</code> to your layout or any component where you’d like the install button to appear.</p>
-<pre><code class="language-typescript">// app/layout.tsx or another component
+<pre><code class="language-jsx">// app/layout.tsx or another component
 import InstallButton from &#39;@/components/InstallButton&#39;;
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {

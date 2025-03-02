@@ -77,7 +77,7 @@ In a Next.js App Router project, use `layout.tsx` in the `app` directory to add 
 
 1. Open your `app/layout.tsx` file and add the manifest link, theme color, and icon link in the `<head>` section.
 
-   ```typescript
+   ```jsx
    // app/layout.tsx
    import './globals.css';
    import { Metadata } from 'next';
@@ -114,7 +114,7 @@ This will allow users to manually trigger the PWA install prompt when they click
 
 1. Create an `InstallButton` component that listens for the `beforeinstallprompt` event, which is triggered when the app meets the PWA installability criteria.
 
-   ```typescript
+   ```jsx
    // components/InstallButton.tsx
    import { useEffect, useState } from 'react';
 
@@ -160,7 +160,7 @@ This will allow users to manually trigger the PWA install prompt when they click
 
 2. Add `InstallButton` to your layout or any component where you’d like the install button to appear.
 
-   ```typescript
+   ```jsx
    // app/layout.tsx or another component
    import InstallButton from '@/components/InstallButton';
 
