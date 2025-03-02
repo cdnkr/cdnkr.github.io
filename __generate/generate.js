@@ -101,7 +101,7 @@ async function generate() {
         if (!config.push) return;
 
         // run git add and git commit
-        exec('cd ../ && git add . && git commit -m "Update blog" && git push', (error, stdout, stderr) => {
+        exec(`cd ../ && git add . && git commit -m "${config.commitMessage}" && git push`, (error, stdout, stderr) => {
             if (error) {
                 console.error(`Error: ${error.message}`);
                 return;
