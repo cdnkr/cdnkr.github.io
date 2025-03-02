@@ -53,7 +53,7 @@ async function generateArticlePageHTML({ title: articleTitle, slug, sectionTitle
                             </a>
                         </div>
                     </div>
-                    <div class="w-full xl:hidden top-8">
+                    <div class="w-full hidden lg:block xl:hidden top-8">
                         <div id="sectionLinks" class="w-full flex flex-col gap-2">
                             ${similar?.sort((a, b) => new Date(b.date) - new Date(a.date))?.map(({date, title, tags, slug}, i) => `
                                 <a href="./${slug}.html">

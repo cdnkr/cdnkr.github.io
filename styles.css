@@ -1541,6 +1541,10 @@ video {
     grid-column: span 8 / span 8;
   }
 
+  .lg\:block{
+    display: block;
+  }
+
   .lg\:flex{
     display: flex;
   }
