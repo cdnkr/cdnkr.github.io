@@ -2,13 +2,14 @@ const config = require('../../config.json');
 
 function containerHTML({
     content,
+    dirOffset = '.'
 }) {
     const [logoPart, logoSecondaryPart] = config.title.split(/\.|\s|-/g);
 
     const html = `
 <div class="w-full max-w-[1740px] flex flex-col gap-8 items-center px-2 lg:px-8">
     <div class="w-full flex justify-start mb-2">
-        <a href="../index.html">
+        <a href="${dirOffset}/index.html">
             <h1 class="text-4xl uppercase font-bold">
                 <span class="text-logo">
                     ${logoPart}</span>
