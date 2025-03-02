@@ -1,0 +1,29 @@
+{
+  "name": "blog-creation-tool",
+  "version": "1.0.0",
+  "description": "Converts markdown articles to an html blog.",
+  "main": "index.js",
+  "scripts": {
+    "start": "nodemon --ext js,md generate.js"
+  },
+  "keywords": [
+    "amrkdown",
+    "blog",
+    "converter",
+    "html"
+  ],
+  "author": "cdnkr",
+  "license": "ISC",
+  "homepage": "/",
+  "devDependencies": {
+    "@tailwindcss/typography": "^0.5.16",
+    "concurrently": "^9.1.2",
+    "dotenv": "^16.3.1",
+    "live-server": "^1.2.2",
+    "marked": "^15.0.7",
+    "nodemon": "^3.1.9",
+    "postcss": "^8.5.3",
+    "postcss-cli": "^11.0.0",
+    "tailwindcss": "^3.4.1"
+  }
+}

@@ -1,68 +1,36 @@
+const fs = require('fs').promises;
+const path = require('path');
 
-    
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>cdnkr.blog</title>
-    <meta name="description" content="some description">
-    <meta name="keywords" content="some,keywords">
-    <link rel="icon" href="https://cdnkr.github.io" sizes="32x32" />
-    <link href="./styles.css" rel="stylesheet">
-    <!-- Add Prism.js CSS and JS -->
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism-tomorrow.min.css" rel="stylesheet" />
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-json.min.js"></script>
-</head>
-    
-<body class="bg-background text-text flex flex-col items-center w-full min-h-screen py-8">
-    
-<div class="w-full max-w-[1740px] flex flex-col gap-8 items-center px-2 lg:px-8">
-    <div class="w-full flex justify-start mb-2">
-        <a href="../index.html">
-            <h1 class="text-4xl uppercase font-bold">
-                <span class="text-logo">
-                    cdnkr</span>
-                <span class="text-primary"> </span>
-                <span class="text-logo-secondary underline decoration-wavy decoration-primary underline-offset-[8px]">
-                    blog
-                </span>
-            </h1>
-        </a>
-    </div>
-    
+const { headHTML } = require('./__document/head');
+const { bodyHTML } = require('./__document/body');
+
+const config = require('../config.json');
+
+async function generateIndexHTML(articles) {
+    const __headHTML = await headHTML({
+        title: config.title,
+        description: config.description,
+        keywords: config.keywords
+    });
+
+    const content = `
 <div class="w-full flex flex-col lg:flex-row gap-4 lg:gap-8">
     <div id="sectionsContainer" class="w-full flex flex-col gap-2">
-        
-            <a href="./articles/setting-up-a-pwa-in-nextjs.html">
-                <div id="Setting%20up%20a%20PWA%20in%20Next.js" class="w-full section-block mb-6 p-4 bg-card-background rounded-lg">
+        ${articles?.sort((a, b) => new Date(b.date) - new Date(a.date))?.map(({date, title, description, tags, slug}, i) => `
+            <a href="./articles/${slug}.html">
+                <div id="${encodeURIComponent(title)}" class="w-full section-block mb-6 p-4 bg-card-background rounded-lg">
                     <div class="w-full flex justify-between mb-2">
-                        <h2 class="text-2xl lg:px-4 max-w-full text-wrap break-words font-bold">Setting up a PWA in Next.js</h2>
+                        <h2 class="text-2xl lg:px-4 max-w-full text-wrap break-words font-bold">${title}</h2>
                     </div>
                     <div class="w-full flex flex-wrap gap-2 mb-2 px-4">
-                        <span class="text-gray-500">2024-11-11</span><span class="text-sm uppercase text-primary">How-to</span><span class="text-sm uppercase text-primary">PWA</span><span class="text-sm uppercase text-primary">Next.js</span>
+                        <span class="text-gray-500">${date}</span>${tags.split(",").map(tag => `<span class="text-sm uppercase text-primary">${tag}</span>`)?.join("")}
                     </div>
                     <div class="tab-content lg:p-4 lg:pt-2">
-                        How to set up a Progressive Web App (PWA) in a Next.js project
+                        ${description}
                     </div>
                 </div>
             </a>
-        
-            <a href="./articles/setting-up-a-dev-ssl-certificate-in-nextjs.html">
-                <div id="Setting%20up%20a%20dev%20SSL%20certificate%20in%20Next.js" class="w-full section-block mb-6 p-4 bg-card-background rounded-lg">
-                    <div class="w-full flex justify-between mb-2">
-                        <h2 class="text-2xl lg:px-4 max-w-full text-wrap break-words font-bold">Setting up a dev SSL certificate in Next.js</h2>
-                    </div>
-                    <div class="w-full flex flex-wrap gap-2 mb-2 px-4">
-                        <span class="text-gray-500">2024-10-30</span><span class="text-sm uppercase text-primary">How-to</span><span class="text-sm uppercase text-primary">SSL</span><span class="text-sm uppercase text-primary">Next.js</span>
-                    </div>
-                    <div class="tab-content lg:p-4 lg:pt-2">
-                        How to set up a development SSL certificate for local testing in Next.js
-                    </div>
-                </div>
-            </a>
-        
+        `).join('')}
     </div>
     <div class="w-full lg:w-[300px] lg:min-w-[300px] lg:max-w-[300px] xl:max-w-[500px] xl:w-[500px] xl:min-w-[500px]">
         <div class="w-full sticky top-8">
@@ -78,21 +46,14 @@
                 </div>
                 <!--
                 <div id="sectionLinksList" class="hidden lg:flex w-full flex-col gap-1 mb-4 max-h-[calc(100vh-20rem)] overflow-y-auto no-scrollbar bg-card-background rounded-lg p-4">
-                
+                ${articles?.map(({ title, slug }, i) => `
                     <a 
-                        href="./articles/setting-up-a-pwa-in-nextjs.html"
-                        class="block hover:bg-card-background bg-card-background transition-colors duration-200 py-1 px-2 rounded-md "
+                        href="./articles/${slug}.html"
+                        class="block hover:bg-card-background ${i === 0 ? 'bg-card-background' : ''} transition-colors duration-200 py-1 px-2 rounded-md "
                     >
-                        Setting up a PWA in Next.js
+                        ${decodeURIComponent(title)}
                     </a>
-                
-                    <a 
-                        href="./articles/setting-up-a-dev-ssl-certificate-in-nextjs.html"
-                        class="block hover:bg-card-background  transition-colors duration-200 py-1 px-2 rounded-md "
-                    >
-                        Setting up a dev SSL certificate in Next.js
-                    </a>
-                
+                `).join('')}
                 </div>
                 -->
                 <div class="w-full flex flex-col gap-6 mb-4 bg-card-background rounded-lg p-4">
@@ -133,11 +94,9 @@
         </div>
     </div>
 </div>
-</div>
-</div>
-    
-<script>
-    
+</div>`
+
+const scripts = `
     document.addEventListener('keydown', (e) => {
         // Only prevent default for arrow keys
         if (e.key === 'ArrowDown' || e.key === 'ArrowUp') {
@@ -296,7 +255,16 @@
                 }
             });
         });
-    });
-</script>
-</body>
-</html>
+    });`
+
+    const pageHTML = `
+    ${__headHTML}
+    ${bodyHTML({
+        content,
+        scripts
+    })}`;
+
+    await fs.writeFile(path.join('../', `index.html`), pageHTML);
+}
+
+exports.generateIndexHTML = generateIndexHTML;

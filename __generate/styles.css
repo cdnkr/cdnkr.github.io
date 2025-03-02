@@ -1,0 +1,37 @@
+@import url('https://fonts.googleapis.com/css2?family=Lexend+Deca:wght@100..900&family=Nunito+Sans:ital,opsz,wght@0,6..12,200..1000;1,6..12,200..1000&display=swap');
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Your custom styles here */
+.no-scrollbar::-webkit-scrollbar {
+    display: none;
+}
+
+.no-scrollbar {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+}
+
+.copied {
+    opacity: 0.7;
+    transition: opacity 0.2s ease;
+}
+
+.token.property { color: #9cdcfe; }
+.token.string { color: #ce9178; }
+.token.number { color: #b5cea8; }
+.token.boolean { color: #569cd6; }
+.token.null { color: #569cd6; }
+
+:root {
+    /* --primary: #ff7f00; */
+    /* --primary: #1dd4f2; */
+    --primary: #d53e4f;
+    --text: #dfdfdf;
+    --background: rgba(0, 0, 0, 0.95);
+    --border-button-background: #262626;
+    --card-background: rgb(255 255 255 / 0.1);
+    --logo: #e0e0e0;
+    --logo-secondary: #b2b2b2;
+}
