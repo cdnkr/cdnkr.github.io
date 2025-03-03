@@ -76,7 +76,7 @@ export default function Background() {
             ctx.lineCap = "round";
 
             // colorful
-            let rndColor = () => `hsl(${intAlea(240)} ${intAlea(60, 100)}% ${intAlea(30, 70)}%)`;
+            // let rndColor = () => `hsl(${intAlea(240)} ${intAlea(60, 100)}% ${intAlea(30, 70)}%)`;
 
             // shades of blue
             // let rndColor = () => `hsl(${intAlea(200, 240)} ${intAlea(60, 100)}% ${intAlea(30, 70)}%)`;
@@ -85,7 +85,7 @@ export default function Background() {
             // let rndColor = () => `hsl(${intAlea(340, 360)} ${intAlea(60, 100)}% ${intAlea(30, 70)}%)`;
 
             // greyscale
-            // let rndColor = () => `hsl(0 0% ${intAlea(0, 100)}%)`;
+            let rndColor = () => `hsl(0 0% ${intAlea(0, 100)}%)`;
 
             let width = maxx / alea(12, 25);
             let nbcol = mceil(maxx / width) + 6;
