@@ -76,7 +76,7 @@ export default function Background() {
             ctx.lineCap = "round";
 
             // colorful
-            // let rndColor = () => `hsl(${intAlea(240)} ${intAlea(60, 100)}% ${intAlea(30, 70)}%)`;
+            let rndColor = () => `hsl(${intAlea(240)} ${intAlea(60, 100)}% ${intAlea(30, 70)}%)`;
 
             // shades of blue
             // let rndColor = () => `hsl(${intAlea(200, 240)} ${intAlea(60, 100)}% ${intAlea(30, 70)}%)`;
@@ -85,7 +85,7 @@ export default function Background() {
             // let rndColor = () => `hsl(${intAlea(340, 360)} ${intAlea(60, 100)}% ${intAlea(30, 70)}%)`;
 
             // greyscale
-            let rndColor = () => `hsl(0 0% ${intAlea(0, 100)}%)`;
+            // let rndColor = () => `hsl(0 0% ${intAlea(0, 100)}%)`;
 
             let width = maxx / alea(12, 25);
             let nbcol = mceil(maxx / width) + 6;
@@ -125,24 +125,11 @@ export default function Background() {
         if (canvasRef.current) {
             ctx = canvasRef.current.getContext('2d');
             startOver();
-
-            // Add event listener for window resize
-            window.addEventListener('resize', startOver);
-            canvasRef.current.addEventListener('click', startOver);
-
-            // Cleanup
-            return () => {
-                window.removeEventListener('resize', startOver);
-                if (canvasRef.current) {
-                    canvasRef.current.removeEventListener('click', startOver);
-                }
-            };
         }
     }, []);
 
     return (
-        <canvas
-            ref={canvasRef}
+        <div
             style={{
                 position: 'fixed',
                 top: 0,
@@ -154,6 +141,17 @@ export default function Background() {
                 pointerEvents: 'none', // Add this if you want clicks to pass through
                 backgroundColor: 'transparent'
             }}
-        />
+        >
+            <div className="absolute w-full h-full bg-black/90 opacity-90" />
+            <canvas
+                ref={canvasRef}
+                style={{
+                    width: '100%',
+                    height: '100%',
+                    opacity: 0.5,
+                    backgroundColor: 'transparent'
+                }}
+            />
+        </div>
     );
 }
