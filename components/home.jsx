@@ -34,6 +34,13 @@ export default function Home({
             <div className="w-full lg:w-[300px] lg:min-w-[300px] lg:max-w-[300px] xl:max-w-[500px] xl:w-[500px] xl:min-w-[500px]">
                 <div className="w-full sticky top-8">
                     <div className="w-full flex flex-col gap-2">
+                        <div className="w-full hidden lg:flex flex-col gap-4 mb-4 bg-card-background-secondary backdrop-blur-sm rounded-lg p-4">
+                            <Input
+                                value={searchTerm}
+                                onChange={(e) => setSearchTerm(e.target.value)}
+                                placeholder="Search page... (Ctrl + K)"
+                            />
+                        </div>
                         <div className="w-full hidden lg:flex flex-wrap gap-4 mb-4 rounded-lg bg-card-background-secondary backdrop-blur-sm p-4 border-l-0 border-primary">
                             {tags.map((tag, i) => (
                                 <span
@@ -44,13 +51,6 @@ export default function Home({
                                     {tag}
                                 </span>
                             ))}
-                        </div>
-                        <div className="w-full hidden lg:flex flex-col gap-4 mb-4 bg-card-background-secondary backdrop-blur-sm rounded-lg p-4">
-                            <Input
-                                value={searchTerm}
-                                onChange={(e) => setSearchTerm(e.target.value)}
-                                placeholder="Search page... (Ctrl + K)"
-                            />
                         </div>
                         <div className="w-full flex flex-col gap-6 mb-4 bg-card-background-secondary backdrop-blur-sm rounded-lg p-4">
                             <Link href="https://github.com/cdnkr" target="_blank" rel="noopener noreferrer">
