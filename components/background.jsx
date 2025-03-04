@@ -76,7 +76,7 @@ export default function Background() {
             ctx.lineCap = "round";
 
             // colorful
-            let rndColor = () => `hsl(${intAlea(240)} ${intAlea(60, 100)}% ${intAlea(30, 70)}%)`;
+            // let rndColor = () => `hsl(${intAlea(200)} ${intAlea(60, 100)}% ${intAlea(30, 70)}%)`;
 
             // shades of blue
             // let rndColor = () => `hsl(${intAlea(200, 240)} ${intAlea(60, 100)}% ${intAlea(30, 70)}%)`;
@@ -86,6 +86,9 @@ export default function Background() {
 
             // greyscale
             // let rndColor = () => `hsl(0 0% ${intAlea(0, 100)}%)`;
+
+            // beige/cream tones
+            let rndColor = () => `hsl(${intAlea(30, 60)} ${intAlea(80, 100)}% ${intAlea(30, 70)}%)`;
 
             let width = maxx / alea(12, 25);
             let nbcol = mceil(maxx / width) + 6;
@@ -142,7 +145,7 @@ export default function Background() {
                 backgroundColor: 'transparent'
             }}
         >
-            <div className="absolute w-full h-full bg-black/90 opacity-90" />
+            {/* <div className="absolute w-full h-full bg-black/50 backdrop-blur-sm opacity-90" /> */}
             <canvas
                 ref={canvasRef}
                 style={{

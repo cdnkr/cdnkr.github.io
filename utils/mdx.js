@@ -21,8 +21,13 @@ export async function getAllPosts() {
         frontmatter,
         content,
         sections: content.split('---'),
-        sectionTitles
+        sectionTitles,
       }
+    });
+
+    posts.forEach((post, index) => {
+      post.previous = posts[index - 1]
+      post.next = posts[index + 1]
     })
     
     return posts

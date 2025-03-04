@@ -2,14 +2,17 @@
 
 @theme {
   /* --color-primary: #d53e4f; */
-  --color-primary: #333;
+  /* --color-primary: #333; */
+  /* --color-primary: #d5873e; */
+  --color-primary: #d5703e;
+  --color-dark: #333;
   --color-text: #333;
   --color-background: rgba(0, 0, 0, 0.95);
   --color-border-button-background: #262626;
   --color-card-background: rgb(255 255 255 / 0.8);
   --color-logo: #333;
   --color-logo-secondary: #333;
-  --color-card-background-secondary: rgba(255, 255, 255, 0.7);
+  --color-card-background-secondary: rgba(255, 255, 255, 1);
   --color-gray-50: #fafafa;
   --color-gray-100: #f5f5f5;
   --color-gray-200: #eeeeee;
@@ -23,6 +26,10 @@
 
   --font-sans: var(--font-lexend);
   --font-mono: var(--font-jetbrains-mono);
+}
+
+.this-is-for-color-picking-in-vscode /* because no color picker appears from the hax codes assigned to variables (: */ {
+  background: #d5703e;
 }
 
 ::-webkit-scrollbar {
