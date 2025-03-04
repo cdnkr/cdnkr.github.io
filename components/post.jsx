@@ -11,7 +11,40 @@ export default function Post({ post }) {
 
     return (
         <article className="w-full grid grid-cols-12 gap-4 lg:gap-8">
-            <div className="w-full col-span-12 lg:col-span-4 xl:col-span-4">
+            <div className="w-full col-span-12 lg:col-span-8 xl:col-span-8 flex flex-col gap-6">
+                <div className="w-full flex flex-col gap-2 border-l-4 border-primary bg-card-background-secondary backdrop-blur-sm rounded-r-lg px-6 pb-4">
+                    <div className="w-full py-6 flex flex-col gap-4">
+                        <div className="w-full flex flex-col">
+                            <h3 className="text-2xl lg:text-4xl max-w-full text-wrap break-words font-bold">{frontmatter.title}</h3>
+                        </div>
+                        <div className="w-full flex items-center flex-wrap gap-2">
+                            <span className="text-gray-700 leading-none">
+                                {frontmatter.date && (
+                                    <time dateTime={frontmatter.date}>
+                                        {new Date(frontmatter.date).toLocaleDateString('en-US', {
+                                            year: 'numeric',
+                                            month: 'short',
+                                            day: 'numeric'
+                                        })}
+                                    </time>
+                                )}
+                            </span>
+                            {frontmatter?.tags?.map((tag, i) => <span key={tag + i} className="text-sm uppercase text-primary font-bold">{tag}</span>)}
+                        </div>
+                        <p>
+                            {frontmatter.description}
+                        </p>
+                    </div>
+                    {post.sections.map((section, i) => (
+                        <div key={i} id={encodeURIComponent(post.sectionTitles[i].replace(/#/g, ""))} className="w-full border-t border-primary">
+                            <MDX
+                                source={section}
+                            />
+                        </div>
+                    ))}
+                </div>
+            </div>
+            <div className="hidden lg:block w-full col-span-12 lg:col-span-4 xl:col-span-4">
                 <div className="w-full lg:sticky top-8">
                     <div className="w-full flex flex-col gap-4 lg:gap-8">
                         <div className="w-full lg:flex flex-col gap-4 bg-card-background-secondary backdrop-blur-sm rounded-lg p-4">
@@ -45,39 +78,6 @@ export default function Post({ post }) {
                     </div>
                 </div>
             </div>
-            <div className="w-full col-span-12 lg:col-span-8 xl:col-span-8 flex flex-col gap-6">
-                <div className="w-full p-4 flex flex-col gap-4 rounded-lg bg-card-background-secondary">
-                    <div className="w-full flex flex-col">
-                        <h3 className="text-2xl lg:text-4xl max-w-full text-wrap break-words font-bold">{frontmatter.title}</h3>
-                    </div>
-                    <div className="w-full flex items-center flex-wrap gap-2">
-                        <span className="text-gray-700 leading-none">
-                            {frontmatter.date && (
-                                <time dateTime={frontmatter.date}>
-                                    {new Date(frontmatter.date).toLocaleDateString('en-US', {
-                                        year: 'numeric',
-                                        month: 'short',
-                                        day: 'numeric'
-                                    })}
-                                </time>
-                            )}
-                        </span>
-                        {frontmatter?.tags?.map((tag, i) => <span key={tag + i} className="text-sm uppercase text-primary font-bold">{tag}</span>)}
-                    </div>
-                    <p>
-                        {frontmatter.description}
-                    </p>
-                </div>
-
-                {post.sections.map((section, i) => (
-                    <div key={i} id={encodeURIComponent(post.sectionTitles[i].replace(/#/g, ""))} className="w-full flex flex-col gap-2 bg-card-background-secondary backdrop-blur-sm rounded-lg px-6 pb-4 border-t-0 border-primary">
-
-                        <MDX
-                            source={section}
-                        />
-                    </div>
-                ))}
-            </div>
-        </article >
+        </article>
     )
 }
